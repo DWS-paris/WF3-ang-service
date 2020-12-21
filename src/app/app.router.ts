@@ -2,13 +2,31 @@
 import { Routes } from "@angular/router";
 
 // Imports des composants des routes
+import { ReadallPageComponent } from './routes/readall-page/readall-page.component';
+import { CreatePageComponent } from './routes/create-page/create-page.component';
+import { ReadonePageComponent } from './routes/readone-page/readone-page.component';
+import { UpdatePageComponent } from './routes/update-page/update-page.component';
+import { DeletePageComponent } from './routes/delete-page/delete-page.component';
 
-/* 
-Créer le module pour les routes et l'exporter
-{
-    path: URL de la route (vide pour homepage),
-    component: COMPOSANT DE LA ROUTE
-}
-*/
 export const AppRouterModule: Routes = [ 
+    {
+        path: '',
+        component: ReadallPageComponent
+    },
+    {
+        path: 'create',
+        component: CreatePageComponent
+    },
+    {
+        path: 'readone/:id',
+        component: ReadonePageComponent
+    },
+    {
+        path: 'update/:id',
+        component: UpdatePageComponent
+    },
+    {
+        path: 'delete',
+        component: DeletePageComponent
+    }
 ];

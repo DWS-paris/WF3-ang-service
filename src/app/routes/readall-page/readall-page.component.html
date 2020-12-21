@@ -1,0 +1,28 @@
+<!-- 
+  Afficher la liste des posts grâce à la fonction getData() 
+  - Créer une variable 'postCollection'
+  - Appeler la fonction getData('https://jsonplaceholder.typicode.com/posts')
+  - Dans le then(), injecter le retour de l'API dans la variable 'postCollection'
+  - Ajoute les balises <ul><li></li></ul>
+  - Appliquer la directive *ngFor sur la balise <li>
+  - Le titre de l'article est en <h2>
+  - Le contenu de l'article est en <p>
+-->
+
+<ul *ngIf="postCollection">
+    <li *ngFor="let item of postCollection">
+      <h2 [innerHTML]="item.title"></h2>
+      <p [innerHTML]="item.body"></p>
+      
+      <ul>
+        <li><a [routerLink]="'/readone/' + item.id">Lire la suite</a></li>
+        <li><a [routerLink]="'/update/' + item.id">Mettre à jour</a></li>
+        <li>
+          <button type="button" 
+            (click)="deleteData('https://jsonplaceholder.typicode.com/posts/'+ item.id)"
+          >Supprimer</button>
+        </li>
+      </ul>
+    </li>
+  </ul>
+  

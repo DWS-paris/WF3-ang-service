@@ -1,0 +1,13 @@
+<!-- 
+  Afficher un post grâce à la fonction getData() 
+  - Créer une variable 'singlePost'
+  - Appeler la fonction getData('https://jsonplaceholder.typicode.com/posts/14')
+  - Dans le then(), injceter le retour de l'API dans la variable 'singlePost'
+  - Ajouter la balise <article></article>
+  - Le titre de l'article est en <h2>
+  - Le contenu de l'article est en <p>
+-->
+<article *ngIf="singlePost">
+    <h2 [innerHTML]="singlePost.title"></h2>
+    <p [innerHTML]="singlePost.body"></p>
+  </article>

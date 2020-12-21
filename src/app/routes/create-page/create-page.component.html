@@ -1,0 +1,30 @@
+<!-- 
+  Créer un formulaire pour utiliser la fonction postData() 
+  - Importer les module pour la gestion du formulaire dans app.module.ts
+    import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+  - Importer les module pour la gestion du formulaire dans app.component.ts
+    import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+  - Créer une variable 'addFormData' suivant la logique de 'FormGroup'
+  - Ajouter les balise <form></form>
+  - Ajouter dans la balise <from> les inputs correspondant au données à créer
+  - Capter la soumission du formulaire
+  - Appeler la fonction postData('https://jsonplaceholder.typicode.com/posts/', this.addFormData.value )
+
+  => Exemple https://gist.github.com/DWS-paris/e8ffa9e8dc7c6055a6c2bc3265b3fc08
+-->
+
+<form 
+  *ngIf="addFormData"
+  [formGroup]="addFormData"
+  (submit)="postData('https://jsonplaceholder.typicode.com/posts/', this.addFormData.value )"
+>
+  <label for="title">Votre titre</label>
+  <input type="text" name="title" id="title" formControlName="title">
+
+  <label for="body">Le contenu</label>
+  <textarea name="body" id="body" formControlName="body"></textarea>
+
+  <input type="text" name="userId" id="userId" formControlName="userId" disabled>
+
+  <button type="submit" [disabled]="!addFormData.valid">Ajouter</button>
+</form>

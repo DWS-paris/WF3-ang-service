@@ -1,0 +1,23 @@
+<!-- 
+  Créer un formulaire pour utiliser la fonction putData() 
+  - Créer une variable 'updateFormData' suivant la logique de 'FormGroup'
+  - Ajouter les balise <form></form>
+  - Ajouter dans la balise <from> les inputs correspondant au données à modifier
+  - Capter la soumission du formulaire
+  - Appeler la fonction putData('https://jsonplaceholder.typicode.com/posts/<ID>', this.updateFormData.value )
+-->
+<form 
+  *ngIf="updateFormData"
+  [formGroup]="updateFormData"
+  (submit)="putData('https://jsonplaceholder.typicode.com/posts/1', this.updateFormData.value )"
+>
+  <label for="title">Votre titre</label>
+  <input type="text" name="title" id="title" formControlName="title">
+
+  <label for="body">Le contenu</label>
+  <textarea name="body" id="body" formControlName="body"></textarea>
+
+  <input type="text" name="userId" id="userId" formControlName="userId" disabled>
+
+  <button type="submit" [disabled]="!updateFormData.valid">Ajouter</button>
+</form>

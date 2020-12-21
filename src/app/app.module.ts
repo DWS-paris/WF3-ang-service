@@ -1,6 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+// Importer le module pour gérer des formualires
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+
 /* 
 Gestion des requêtes HTTP
 */
@@ -23,17 +26,28 @@ Gestion des routes
 
 
 import { AppComponent } from './app.component';
+import { ReadallPageComponent } from './routes/readall-page/readall-page.component';
+import { CreatePageComponent } from './routes/create-page/create-page.component';
+import { ReadonePageComponent } from './routes/readone-page/readone-page.component';
+import { UpdatePageComponent } from './routes/update-page/update-page.component';
+import { DeletePageComponent } from './routes/delete-page/delete-page.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ReadallPageComponent,
+    CreatePageComponent,
+    ReadonePageComponent,
+    UpdatePageComponent,
+    DeletePageComponent
   ],
   // Intégrer tous les modules dans le tableau des imports
   imports: [
     BrowserModule,
     HttpClientModule,
     // Configuration du module du router
-    RouterModule.forRoot( AppRouterModule, { onSameUrlNavigation: 'reload' } )
+    RouterModule.forRoot( AppRouterModule, { onSameUrlNavigation: 'reload' } ),
+    FormsModule, ReactiveFormsModule
   ],
   // Intégrer tous les services dans le tableau des providers
   providers: [ CrudService ],

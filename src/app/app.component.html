@@ -2,22 +2,33 @@
   Afficher la liste des posts grâce à la fonction getData() 
   - Créer une variable 'postCollection'
   - Appeler la fonction getData('https://jsonplaceholder.typicode.com/posts')
-  - Dans le then(), injceter le retour de l'API dans la variable 'postCollection'
+  - Dans le then(), injecter le retour de l'API dans la variable 'postCollection'
   - Ajoute les balises <ul><li></li></ul>
   - Appliquer la directive *ngFor sur la balise <li>
   - Le titre de l'article est en <h2>
   - Le contenu de l'article est en <p>
 -->
 
+<ul *ngIf="postCollection">
+  <li *ngFor="let item of postCollection">
+    <h2 [innerHTML]="item.title"></h2>
+    <p [innerHTML]="item.body"></p>
+  </li>
+</ul>
+
 <!-- 
   Afficher un post grâce à la fonction getData() 
   - Créer une variable 'singlePost'
   - Appeler la fonction getData('https://jsonplaceholder.typicode.com/posts/14')
   - Dans le then(), injceter le retour de l'API dans la variable 'singlePost'
-  - Ajouter les blaises <article></article>
+  - Ajouter la balise <article></article>
   - Le titre de l'article est en <h2>
   - Le contenu de l'article est en <p>
 -->
+<article *ngIf="singlePost">
+  <h2 [innerHTML]="singlePost.title"></h2>
+  <p [innerHTML]="singlePost.body"></p>
+</article>
 
 <!-- 
   Créer un formulaire pour utiliser la fonction postData() 
@@ -34,14 +45,45 @@
   => Exemple https://gist.github.com/DWS-paris/e8ffa9e8dc7c6055a6c2bc3265b3fc08
 -->
 
+<form 
+  *ngIf="addFormData"
+  [formGroup]="addFormData"
+  (submit)="postData('https://jsonplaceholder.typicode.com/posts/', this.addFormData.value )"
+>
+  <label for="title">Votre titre</label>
+  <input type="text" name="title" id="title" formControlName="title">
+
+  <label for="body">Le contenu</label>
+  <textarea name="body" id="body" formControlName="body"></textarea>
+
+  <input type="text" name="userId" id="userId" formControlName="userId" disabled>
+
+  <button type="submit" [disabled]="!addFormData.valid">Ajouter</button>
+</form>
+
 <!-- 
   Créer un formulaire pour utiliser la fonction putData() 
   - Créer une variable 'updateFormData' suivant la logique de 'FormGroup'
   - Ajouter les balise <form></form>
   - Ajouter dans la balise <from> les inputs correspondant au données à modifier
   - Capter la soumission du formulaire
-  - Appeler la fonction putData('https://jsonplaceholder.typicode.com/posts/', this.updateFormData.value )
+  - Appeler la fonction putData('https://jsonplaceholder.typicode.com/posts/<ID>', this.updateFormData.value )
 -->
+<form 
+  *ngIf="updateFormData"
+  [formGroup]="updateFormData"
+  (submit)="putData('https://jsonplaceholder.typicode.com/posts/1', this.updateFormData.value )"
+>
+  <label for="title">Votre titre</label>
+  <input type="text" name="title" id="title" formControlName="title">
+
+  <label for="body">Le contenu</label>
+  <textarea name="body" id="body" formControlName="body"></textarea>
+
+  <input type="text" name="userId" id="userId" formControlName="userId" disabled>
+
+  <button type="submit" [disabled]="!updateFormData.valid">Ajouter</button>
+</form>
 
 <!-- 
   Créer un bouton pour utiliser la fonction deleteData()
@@ -49,6 +91,7 @@
   - Capter la clic sur la balise button
   - Appeler la fonction deleteData('https://jsonplaceholder.typicode.com/posts/', '14') au moment du clic sur le bouton
 -->
+<button type="button" (click)="deleteData('https://jsonplaceholder.typicode.com/posts/', '14')">Supprimer</button>
 
 <!-- Une fois fini, créer une route par fonction (/readall, /readone, /create, /update, /delete) -->
 <!-- 
